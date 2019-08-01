@@ -25,7 +25,7 @@ SECRET_KEY = 'ff=!6(3u$jt_u$0zdn^v(eyb6f&-#q(c32hql2x%rpi=8er_5q'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['calm-wave-12873.herokuapp.com']
 
 
 # Application definition
