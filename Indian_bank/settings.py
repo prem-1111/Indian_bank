@@ -82,7 +82,7 @@ DATABASES = {
         'NAME': 'bank',
         'USER': 'postgres',
         'PASSWORD': 'prem1234',
-        'HOST': 'localhost',
+        'HOST': 'https://calm-wave-12873.herokuapp.com/db',
         'PORT': '',
     }
 }
