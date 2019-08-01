@@ -76,17 +76,23 @@ WSGI_APPLICATION = 'Indian_bank.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'bank',
-        'USER': 'postgres',
-        'PASSWORD': 'prem1234',
-        'HOST': 'https://calm-wave-12873.herokuapp.com/db',
-        'PORT': '',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'bank',
+#         'USER': 'postgres',
+#         'PASSWORD': 'prem1234',
+#         'HOST': 'https://calm-wave-12873.herokuapp.com/db',
+#         'PORT': '',
+#     }
+# }
 
+DEBUG = config('DEBUG', default=False, cast=bool)
+DATABASES = {
+    'default': dj_database_url.config(
+        default=config('DATABASE_URL')
+    )
+}
 
 
 # Password validation
