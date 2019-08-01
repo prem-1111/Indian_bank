@@ -3,11 +3,13 @@ from rest_framework import viewsets
 from .serializers import BankSerializer, BranchesSerializer
 from .models import BankBranches
 # Create your views here.
+from rest_framework.permissions import IsAuthenticated
 
 
 class BankdetailsViewSet(viewsets.ModelViewSet):
 
     serializer_class = BankSerializer
+    permission_classes = (IsAuthenticated,)
 
     def get_queryset(self):
         ifsc = self.kwargs['ifsc']
@@ -19,6 +21,7 @@ class BankdetailsViewSet(viewsets.ModelViewSet):
 class BranchesdetailsViewSet(viewsets.ModelViewSet):
 
     serializer_class = BranchesSerializer
+    permission_classes = (IsAuthenticated,)
 
     def get_queryset(self):
         bank_name = self.kwargs['bank_name']

@@ -6,6 +6,7 @@ from django.db import models
 class Banks(models.Model):
     class Meta:
         db_table = 'banks'
+    id = models.BigIntegerField(primary_key=True)
     name = models.CharField(max_length=49)
 
     def __str__(self):
