@@ -14,7 +14,6 @@ class BankdetailsViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         ifsc = self.request.GET.get('ifsc')
         queryset = BankBranches.objects.filter(ifsc=ifsc)
-        print(queryset)
         return queryset
 
 
@@ -27,6 +26,5 @@ class BranchesdetailsViewSet(viewsets.ModelViewSet):
         bank_name = self.request.GET.get('bank_name')
         city = self.request.GET.get('city')
         queryset = BankBranches.objects.filter(bank_name=bank_name, city=city)
-        print(queryset)
         return queryset
 
