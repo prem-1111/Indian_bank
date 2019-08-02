@@ -12,6 +12,10 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 
 import os
 from datetime import timedelta
+import dj_database_url
+from decouple import config
+from dj_database_url import parse as db_url
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -20,12 +24,20 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'ff=!6(3u$jt_u$0zdn^v(eyb6f&-#q(c32hql2x%rpi=8er_5q'
+SECRET_KEY = config('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = config('DEBUG', default=False, cast=bool)
+TEMPLATE_DEBUG = DEBUG
 
 ALLOWED_HOSTS = ['calm-wave-12873.herokuapp.com']
+
+DATABASES = {
+    'default': config(
+        'DATABASE_URL',
+        cast=db_url
+    )
+}
 
 
 # Application definition
@@ -76,16 +88,6 @@ WSGI_APPLICATION = 'Indian_bank.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'bank',
-        'USER': 'postgres',
-        'PASSWORD': 'prem1234',
-        'HOST': 'localhost',
-        'PORT': '',
-    }
-}
 
 
 
@@ -139,10 +141,10 @@ REST_FRAMEWORK = {
 
 
 SIMPLE_JWT = {
-    'ACCESS_TOKEN_LIFETIME': timedelta(days=5),
-    'REFRESH_TOKEN_LIFETIME': timedelta(days=10),
+    'ACCESS_TOKEN_LIFETIME': timedelta(days=config('ACCESS_TOKEN_LIFETIME')),
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=config('REFRESH_TOKEN_LIFETIME')),
 
 }
-import dj_database_url
-prod_db  =  dj_database_url.config(conn_max_age=500)
+
+prod_db  =  dj_database_url.config(conn_max_age=config(conn_max_age))
 DATABASES['default'].update(prod_db)
