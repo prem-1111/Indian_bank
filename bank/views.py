@@ -12,7 +12,7 @@ class BankdetailsViewSet(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticated,)
 
     def get_queryset(self):
-        ifsc = self.kwargs['ifsc']
+        ifsc = self.request.GET.get('ifsc')
         queryset = BankBranches.objects.filter(ifsc=ifsc)
         print(queryset)
         return queryset
@@ -24,8 +24,8 @@ class BranchesdetailsViewSet(viewsets.ModelViewSet):
     permission_classes = (IsAuthenticated,)
 
     def get_queryset(self):
-        bank_name = self.kwargs['bank_name']
-        city = self.kwargs['city']
+        bank_name = self.request.GET.get('bank_name')
+        city = self.request.GET.get('city')
         queryset = BankBranches.objects.filter(bank_name=bank_name, city=city)
         print(queryset)
         return queryset
